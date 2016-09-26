@@ -1,6 +1,8 @@
 require "quick_export/version"
+require "active_support"
 
 module QuickExport
+	extend ActiveSupport::Concern
 	class Base 
 
 		def self.generate_random_filename
