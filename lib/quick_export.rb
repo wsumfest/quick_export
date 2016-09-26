@@ -4,6 +4,7 @@ require "active_support"
 module QuickExport
   extend ActiveSupport::Concern
   class Base
+  	@file_extension = nil
   	"""
   	Generates a string of random letters for filenames.
   	""" 
@@ -12,14 +13,17 @@ module QuickExport
 	  (0...30).map { o[rand(o.length)] }.join
 	end
 
+	def self.get_file_extension
+		return @file_extension
+	end
   end
   class To_CSV < Base
-	@@file_extension = ".csv"
+	@file_extension = ".csv"
 	def self.dump_csv
 	end
   end
   class To_XLS < Base
-	@@file_extension = ".xls"
+	@file_extension = ".xls"
 	def self.dump_xls
 	end
   end
