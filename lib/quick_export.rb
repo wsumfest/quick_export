@@ -73,6 +73,13 @@ class ActiveRecord::Relation
 		ActiveRecord::Base.connection.execute(sql)
 	end
 
+	"""
+	Export function.
+	"""
+	def export(filename, is_csv)
+		write_to_file(filename, is_csv)
+	end
+
 	private
 
 	def write_to_file(filename, is_csv)
@@ -83,7 +90,7 @@ class ActiveRecord::Relation
 				csv << self.format_data(row, is_csv)
 			end
 		end
-
+		filename
 	end
 
 	"""
