@@ -79,7 +79,7 @@ class ActiveRecord::Relation
 		CSV.open(filename, "w") do |csv|
 			csv << self.format_data(data.fields.to_a, is_csv)
 			data.each do |row|
-				csv << self.format_data(row.to_a, is_csv)
+				csv << self.format_data(row.to_a, is_csv) unless row.instance_of? String
 			end
 		end
 		filename
