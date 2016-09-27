@@ -41,9 +41,11 @@ class ActiveRecord::Base
 		filename
 	end
 
-	def export(is_csv)
-		filename = build_filename(is_csv)
-
+	"""
+	Returns the raw sql for an ActiveRecord association.
+	"""
+	def generate_sql
+		self.to_sql
 	end
 	
 end
