@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe QuickExport::To_XLS do
 	describe "#get_file_extension" do
-		it "should be nil for Base class" do
+		it "should be .xls for XLS class" do
 			expect(QuickExport::To_XLS.get_file_extension).to eq(".xls")
 		end
 	end
@@ -17,8 +17,11 @@ describe QuickExport::To_XLS do
 			second_filename = QuickExport::To_XLS.generate_random_filename
 			expect(first_filename).not_to eq(second_filename)
 		end
-
 	end
 
-
+	describe "#build_filename" do
+		it "should be implemented in XLS class" do
+			expect(QuickExport::To_XLS.build_filename).not_to be(nil)
+		end
+	end
 end
