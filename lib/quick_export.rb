@@ -40,12 +40,14 @@ class ActiveRecord::Base
 		end
 		filename
 	end
+	
+end
 
+class ActiveRecord::Relation 
 	"""
-	Returns the raw sql for an ActiveRecord association.
+	Getter method for active record relations.
 	"""
 	def generate_sql
 		self.to_sql
 	end
-	
 end
