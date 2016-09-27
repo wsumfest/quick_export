@@ -45,6 +45,17 @@ class ActiveRecord::Base
 end
 
 class ActiveRecord::Relation 
+
+	"""
+	Export new file to inside root path.
+	"""
+	def export(root_path, is_csv=true)
+		filename = ActiveRecord::Base.build_filename(is_csv)
+		full_path = File.join(root_path, filename)
+		full_path
+	end
+
+	protected
 	"""
 	Getter method for active record relations.
 	"""
@@ -60,6 +71,5 @@ class ActiveRecord::Relation
 		ActiveRecord::Base.connection.reconnect!
 		ActiveRecord::Base.connection.execute(sql)
 	end
-
 
 end
