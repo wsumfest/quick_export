@@ -1,6 +1,6 @@
 # QuickExport
 
-Export your rails models faster with QuickExport.
+Export your Models faster with QuickExport. Currently support exporting Active Record models into csv of xls files.
 
 ## Installation
 
