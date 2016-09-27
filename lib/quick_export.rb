@@ -77,9 +77,9 @@ class ActiveRecord::Relation
 	def write_to_file(filename, is_csv)
 		data = self.execute_query
 		CSV.open(filename, "w") do |csv|
-			csv << self.format_data(data.fields, is_csv)
+			csv << self.format_data(data.fields.to_a, is_csv)
 			data.each do |row|
-				csv << self.format_data(row, is_csv)
+				csv << self.format_data(row.to_a, is_csv)
 			end
 		end
 		filename
