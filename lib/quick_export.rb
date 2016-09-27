@@ -73,8 +73,6 @@ class ActiveRecord::Relation
 		ActiveRecord::Base.connection.execute(sql)
 	end
 
-	private
-
 	def write_to_file(filename, is_csv)
 		data = self.execute_query
 		FasterCSV.open(filename, "w") do |csv|
