@@ -77,7 +77,7 @@ class ActiveRecord::Relation
 	def write_to_file(filename, is_csv)
 		t1 = Time.now
 		data = self.execute_query
-		File.open(filename, "w") do |f|
+		File.open(filename, File::RDWR|File::CREAT) do |f|
 			f.puts format_data(data.fields.to_a, is_csv)
 			data.each do |row|
 				f.puts format_data(row.to_a, is_csv) unless row.instance_of? String
