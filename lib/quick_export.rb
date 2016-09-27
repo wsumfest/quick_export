@@ -93,13 +93,7 @@ class ActiveRecord::Relation
 		arr.each do |value|
 			new_arr << "'#{value}'"
 		end
-		ret = ""
-		if is_csv
-			ret = new_arr.join(",")
-		else
-			ret = new_arr.join("\t")
-		end
-		ret
+		new_arr
 	end
 
 end
