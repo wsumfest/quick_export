@@ -32,7 +32,7 @@ Then call the export function:
 models.export(file_direcory)
 ```
 
-This will return a filepath that is generated internally, `filepath = File.join(file_directory, random_name)`. This file will contain the content from the ActiveRecord::Relation instance, specified in the format you choose.
+This will return a filepath that is generated internally, `ruby filepath = File.join(file_directory, random_name)`. This file will contain the content from the ActiveRecord::Relation instance, specified in the format you choose.
 
 ## Development
 
