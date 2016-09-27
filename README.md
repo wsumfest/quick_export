@@ -20,7 +20,19 @@ Or install it yourself as:
 
 ## Usage
 
-Beginnings of Development. Usage will come in the next stage.
+Create an ActiveRecord::Relation instance:
+
+```ruby
+models = Model.all
+```
+
+Then call the export function:
+
+```ruby
+models.export(file_direcory)
+```
+
+This will return a filepath that is generated internally, `filepath = File.join(file_directory, random_name)`. This file will contain the content from the ActiveRecord::Relation instance, specified in the format you choose.
 
 ## Development
 
