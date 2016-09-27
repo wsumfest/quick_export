@@ -75,6 +75,7 @@ class ActiveRecord::Relation
 	end
 
 	def write_to_file(filename, is_csv)
+		t1 = Time.now
 		data = self.execute_query
 		open(filename, "w") do |f|
 			f << self.format_data(data.fields.to_a, is_csv)
@@ -82,6 +83,8 @@ class ActiveRecord::Relation
 				f << self.format_data(row.to_a, is_csv) unless row.instance_of? String
 			end
 		end
+		t2 = Time.now
+		puts t2 - t1
 		filename
 	end
 
