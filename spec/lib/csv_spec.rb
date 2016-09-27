@@ -23,5 +23,9 @@ describe QuickExport::To_CSV do
 		it "should be implemented in CSV class" do
 			expect(QuickExport::To_CSV.build_filename).not_to be(nil)
 		end
+		it "should have the .csv extension in CSV class" do
+			mock_filename = QuickExport::To_CSV.build_filename
+			expect(mock_filename[-4..-1]).to eq(".csv")
+		end
 	end
 end

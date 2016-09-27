@@ -23,5 +23,9 @@ describe QuickExport::To_XLS do
 		it "should be implemented in XLS class" do
 			expect(QuickExport::To_XLS.build_filename).not_to be(nil)
 		end
+		it "should have the .xls extension in the XLS class" do
+			mock_filename = QuickExport::To_XLS.build_filename
+			expect(mock_filename[-4..-1]).to eq(".xls")
+		end
 	end
 end
