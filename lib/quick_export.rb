@@ -78,9 +78,9 @@ class ActiveRecord::Relation
 		t1 = Time.now
 		data = self.execute_query
 		File.open(filename, "w") do |f|
-			f << f.puts format_data(data.fields.to_a, is_csv)
+			f.puts format_data(data.fields.to_a, is_csv)
 			data.each do |row|
-				f << f.puts format_data(row.to_a, is_csv) unless row.instance_of? String
+				f.puts format_data(row.to_a, is_csv) unless row.instance_of? String
 			end
 		end
 		t2 = Time.now
