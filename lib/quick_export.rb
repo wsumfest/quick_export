@@ -1,5 +1,6 @@
 require "quick_export/version"
 require "active_record"
+require "fastercsv"
 
 @@csv_extension = ".csv"
 @@xls_extension = ".xls"
@@ -50,4 +51,16 @@ class ActiveRecord::Relation
 	def generate_sql
 		self.to_sql
 	end
+
+	"""
+	Execute MySQL query given.
+	"""
+	def execute_query
+		sql = self.generate_sql
+		base = self.class
+		base.connection.reconnect!
+		base.connection.execute(sql)
+	end
+
+
 end

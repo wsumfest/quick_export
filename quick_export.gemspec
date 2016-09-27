@@ -32,6 +32,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "mysql2", '~> 0.3.20'
   spec.add_development_dependency "factory_girl"
   spec.add_dependency "activerecord"
-  spec.add_dependency "activesupport"
+  spec.add_dependency "fastercsv"
 
 end

@@ -7,5 +7,7 @@ describe ActiveRecord::Base do
 end
 
 describe ActiveRecord::Relation do
-	it "should include QuickExport modules "
+	it "should include QuickExport modules" do
+		puts "not implemented"
+	end
 end
