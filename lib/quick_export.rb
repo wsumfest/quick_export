@@ -57,9 +57,8 @@ class ActiveRecord::Relation
 	"""
 	def execute_query
 		sql = self.generate_sql
-		base = self.class
-		base.connection.reconnect!
-		base.connection.execute(sql)
+		ActiveRecord::Base.connection.reconnect!
+		ActiveRecord::Base.connection.execute(sql)
 	end
 
 
