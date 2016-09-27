@@ -1,60 +1,49 @@
 require "quick_export/version"
-require "active_support"
+require "active_record"
 
-module QuickExport
-  extend ActiveSupport::Concern
-  class Base
-  	@file_extension = nil
-  	"""
+@@csv_extension = ".csv"
+@@xls_extension = ".xls"
+
+class ActiveRecord::Base 
+	"""
   	Generates a string of random letters for filenames.
   	""" 
     def self.generate_random_filename
-	  o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
-	  (0...30).map { o[rand(o.length)] }.join
+		o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
+		(0...30).map { o[rand(o.length)] }.join
 	end
 
 	"""
-	Getter method for file extension.
+	Getter method for csv file extension.
 	"""
-	def self.get_file_extension
-		return @file_extension
+	def self.get_csv_extension
+		@@csv_extension
 	end
 
 	"""
-	Full filename is not implemented in Base class.
+	Getter method for xls file extension.
 	"""
-	def self.build_filename
-
-	end
-
-  end
-
-  class To_CSV < Base
-	@file_extension = ".csv"
-	def self.dump_csv
+	def self.get_xls_extension
+		@@xls_extension
 	end
 
 	"""
-	Returns a random filename with a csv extension.
+	Generates a full filename with extension.
 	"""
-	def self.build_filename
-		generate_random_filename + @file_extension
+	def self.build_filename(is_csv=true)
+		filename = ""
+		if is_csv
+			filename = generate_random_filename + get_csv_extension
+
+		else
+			filename = generate_random_filename + get_xls_extension
+		end
+		filename
 	end
 
-  end
+	def export(is_csv)
+		filename = build_filename(is_csv)
 
-  class To_XLS < Base
-	@file_extension = ".xls"
-	def self.dump_xls
-	end
-
-	"""
-	Returns a random filename with a xls extension.
-	"""
-	def self.build_filename
-		generate_random_filename + @file_extension
 	end
 	
-  end
-
 end
