@@ -56,7 +56,6 @@ class ActiveRecord::Relation
 
 	end
 
-	protected
 	"""
 	Getter method for active record relations.
 	"""
