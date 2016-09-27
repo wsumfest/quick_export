@@ -69,8 +69,9 @@ class ActiveRecord::Relation
 	def execute_query
 		sql = self.generate_sql
 		ActiveRecord::Base.connection.reconnect!
-		ActiveRecord::Base.connection.execute(sql)
+		data = ActiveRecord::Base.connection.execute(sql)
 		ActiveRecord::Base.connection.close
+		data
 	end
 
 	def write_to_file(filename, is_csv)
