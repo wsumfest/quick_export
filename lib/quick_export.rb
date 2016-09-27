@@ -52,7 +52,8 @@ class ActiveRecord::Relation
 	def export(root_path, is_csv=true)
 		filename = ActiveRecord::Base.build_filename(is_csv)
 		full_path = File.join(root_path, filename)
-		full_path
+		self.write_to_file(full_path, is_csv)
+
 	end
 
 	protected
@@ -70,6 +71,33 @@ class ActiveRecord::Relation
 		sql = self.generate_sql
 		ActiveRecord::Base.connection.reconnect!
 		ActiveRecord::Base.connection.execute(sql)
+	end
+
+	private
+
+	def write_to_file(filename, is_csv)
+		data = self.execute_query
+		FasterCSV.open(filename, "w") do |csv|
+			csv << self.format_data(data.fields, is_csv)
+			data.each do |row|
+				csv << self.format_data(row, is_csv)
+			end
+		end
+
+	end
+
+	"""
+	Formats an array of values, seperating it either by tabs or commas and enclosing it with quotations.
+	"""
+	def format_data(arr, is_csv)
+		ret = ""
+		arr = arr.map { |a| "'#{a}'" }
+		if is_csv
+			ret = arr.join(",")
+		else
+			ret = arr.join("\t")
+		end
+		ret
 	end
 
 end
