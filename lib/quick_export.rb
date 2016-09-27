@@ -89,15 +89,15 @@ class ActiveRecord::Relation
 	Formats an array of values, seperating it either by tabs or commas and enclosing it with quotations.
 	"""
 	def format_data(arr, is_csv)
-		new_arr = []
-		arr.each do |value|
-			new_arr << "'#{value}'"
-		end
 		ret = ""
 		if is_csv
+			new_arr = []
+			arr.each do |value|
+				new_arr << "'#{value}'"
+			end
 			ret = new_arr.join(",")
 		else
-			ret = new_arr.join("\t")
+			ret = arr.join("\t")
 		end
 		ret + "\n"
 	end
