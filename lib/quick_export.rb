@@ -76,10 +76,10 @@ class ActiveRecord::Relation
 
 	def write_to_file(filename, is_csv)
 		data = self.execute_query
-		CSV.open(filename, "w") do |csv|
-			csv << self.format_data(data.fields.to_a, is_csv)
+		open(filename, "w") do |f|
+			f << self.format_data(data.fields.to_a, is_csv)
 			data.each do |row|
-				csv << self.format_data(row.to_a, is_csv) unless row.instance_of? String
+				f << self.format_data(row.to_a, is_csv) unless row.instance_of? String
 			end
 		end
 		filename
@@ -93,7 +93,13 @@ class ActiveRecord::Relation
 		arr.each do |value|
 			new_arr << "'#{value}'"
 		end
-		new_arr
+		ret = ""
+		if is_csv
+			ret = new_arr.join(",")
+		else
+			ret = new_arr.join("\t")
+		end
+		ret + "\n"
 	end
 
 end
