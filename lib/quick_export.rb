@@ -1,6 +1,6 @@
 require "quick_export/version"
 require "active_record"
-require "fastercsv"
+require "csv"
 
 @@csv_extension = ".csv"
 @@xls_extension = ".xls"
@@ -75,7 +75,7 @@ class ActiveRecord::Relation
 
 	def write_to_file(filename, is_csv)
 		data = self.execute_query
-		FasterCSV.open(filename, "w") do |csv|
+		CSV.open(filename, "w") do |csv|
 			csv << self.format_data(data.fields, is_csv)
 			data.each do |row|
 				csv << self.format_data(row, is_csv)
